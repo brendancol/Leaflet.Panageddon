@@ -14,12 +14,6 @@ L.PanageddonMap = L.Map.extend({
 		return this;
 	},
 
-	start: function(panType, speed) {
-		if (panType === 'bounce') {
-			this.setInterval(this.bounce(), speed * 1000 + 100);
-		}
-	},
-
 	_bounce: function (options) {
 
 		if(!options.startingAngle) {
@@ -33,6 +27,16 @@ L.PanageddonMap = L.Map.extend({
 		if(!options.groundInterval) {
 			options.groundInterval = .05;
 		}
+
+		if(!options.refreshRate) {
+			options.refreshRate = 2;
+		}
+
+		if(!options.bbox) {
+			options.bbox = [-90, 180, 90, 180];
+		}
+
+		bounceOptions['bbox'];
 
 		var self = this;
 		var startingPosition = this.getCenter();
@@ -49,7 +53,7 @@ L.PanageddonMap = L.Map.extend({
 
 	bounce: function (options) {
 		var func = this._bounce(options);
-		this.activePathes.push(setInterval(func, options.speed * 1000 + 100));
+		this.activePathes.push(setInterval(func, options.refreshRate * 1000 + 100));
 	}
 
 });
