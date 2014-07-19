@@ -1,0 +1,49 @@
+<html>
+<head>
+  <meta charset=utf-8 />
+  <title>Panageddon Samples</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+  <!-- Load Leaflet from CDN-->
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+
+  <!-- Load Esri Leaflet from CDN -->
+  <script src="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet/0.0.1-beta.5/esri-leaflet.js"></script>
+  <script src="panageddon.js"></script>
+
+  <style>
+    body {margin:0;padding:0;}
+    #map {position: absolute;top:0;bottom:0;right:0;left:0;}
+    
+    .leaflet-container {
+      background-color:rgba(255,0,0,0.0);
+  }
+  .leaflet-control-container {
+      display:none;
+  }
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script>
+  var map = L.panageddonMap('map').setView([37, -90], 8);
+
+  var layer = L.esri.basemapLayer('ImageryLabels');
+  layer.setOpacity(0.3);
+  layer.addTo(map);
+
+  var bounceOptions = {};
+  bounceOptions['refreshRate']  = .5;
+  bounceOptions['startingAngle'] = 60;
+  bounceOptions['duration'] = .5;
+  bounceOptions['groundInterval'] = .05;
+  bounceOptions['bbox'] = [35, -92, 39, 88];
+
+  map.bounce(bounceOptions);
+
+</script>
+</body>
+</html>
