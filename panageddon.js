@@ -33,7 +33,7 @@ L.PanageddonMap = L.Map.extend({
 		}
 
 		if(!options.bbox) {
-			options.bbox = [-90, 180, 90, 180];
+			options.bbox = [-90, -180, 90, 180];
 		}
 
 		bounceOptions['bbox'];
@@ -45,9 +45,23 @@ L.PanageddonMap = L.Map.extend({
 		var dy = options.groundInterval * Math.sin(options.startingAngle * (180 / Math.PI));
 		return function () {
 			console.log('bounce: ' + position.toString());
-			self.panTo(position, {animate: true, duration: options.duration, easeLinearity: 1.0});
+			console.log('bbox' + options.bbox.toString());
 		 	position[0] = Number((position[0] + dy).toFixed(6));
 		 	position[1] = Number((position[1] + dx).toFixed(6));
+
+		 	if (position[0] < options.bbox[0] || 
+		 		position[0] > options.bbox[2] ||
+		 		position[1] < options.bbox[1] || 
+		 		position[1] > options.bbox[3]) {
+		 		dx = dx * -1;
+		 		dy = dy * -1;
+		 		position[0] = Number((position[0] + dy).toFixed(6));
+		 		position[1] = Number((position[1] + dx).toFixed(6));
+		 		console.log('changing direction!!!');
+
+		 	}
+
+			self.panTo(position, {animate: true, duration: options.duration, easeLinearity: 1.0});
 		}
 	},
 
