@@ -27,16 +27,23 @@
 </head>
 <body>
 
-<div id="map"></div>
 <div id="referenceMap"></div>
+<div id="map"></div>
+
 
 <script>
-  var referenceMap = L.map('referenceMap').setView([37, -90], 8);
-  var map = L.panageddonMap('map').setView([37, -90], 8);
+  var map = L.panageddonMap('map').setView([37, -90], 9);
+  var referenceMap = L.map('referenceMap').setView([37, -90], 9);
+
+  var layer2 = L.esri.basemapLayer('Imagery');
+  layer2.setOpacity(0.65);
+  layer2.addTo(map);
 
   var layer = L.esri.basemapLayer('ImageryLabels');
-  layer.setOpacity(0.3);
+  layer.setOpacity(1.0);
   layer.addTo(map);
+
+  
 
   var bounceOptions = {};
   bounceOptions['refreshRate']  = .25;
@@ -44,7 +51,7 @@
   bounceOptions['duration'] = .5;
   bounceOptions['groundInterval'] = .05;
   bounceOptions['bbox'] = [36.5, -90.5, 37.5, -89.5];
-  bounceOptions['edgeMethod'] = 'reflect';
+  bounceOptions['edgeMethod'] = 'reverse';
 
   map.bounce(bounceOptions);
 

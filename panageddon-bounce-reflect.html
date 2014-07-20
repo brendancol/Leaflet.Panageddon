@@ -27,12 +27,13 @@
 </head>
 <body>
 
-<div id="map"></div>
+
 <div id="referenceMap"></div>
+<div id="map"></div>
 
 <script>
-  var referenceMap = L.map('referenceMap').setView([37, -90], 8);
-  var map = L.panageddonMap('map').setView([37, -90], 8);
+  var map = L.panageddonMap('map').setView([37, -90], 9);
+  var referenceMap = L.map('referenceMap').setView([37, -90], 9);
 
   var layer = L.esri.basemapLayer('ImageryLabels');
   layer.setOpacity(0.3);
